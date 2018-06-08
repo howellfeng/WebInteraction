@@ -32,7 +32,7 @@ namespace WebInteraction
         }
         public virtual void Create(TData data)
         {
-            TData result = process<TData>(_client.PostAsJsonAsync(ControllUrl, data));
+            TData result = process<TData>(_client.PostAsJsonAsync(ControllerUrl, data));
             _idWriter(data, _idSelector(result));
         }
         public virtual TData[] LoadAll()
@@ -49,12 +49,12 @@ namespace WebInteraction
         }
         public virtual void Remove(TKey id)
         {
-            string url = $"{ControllUrl}/{formatId(id)}";
+            string url = $"{ControllerUrl}/{formatId(id)}";
             process(_client.DeleteAsync(url));
         }
         public virtual void Update(TData data)
         {
-            process(_client.PutAsJsonAsync(ControllUrl, data));
+            process(_client.PutAsJsonAsync(ControllerUrl, data));
         }
 
         private string formatId(TKey id)
@@ -69,10 +69,10 @@ namespace WebInteraction
     public class WebApiClient
     {
         protected HttpClient _client;
-        public string ControllUrl { get; private set; }
+        public string ControllerUrl { get; private set; }
         public WebApiClient(string server, string prefix, string controller, int timeout = 15)
         {
-            ControllUrl = $"{prefix}{controller}";
+            ControllerUrl = $"{prefix}{controller}";
             _client = new HttpClient();
             _client.BaseAddress = new Uri(server);
             _client.DefaultRequestHeaders.Accept.Clear();
@@ -88,7 +88,7 @@ namespace WebInteraction
         }
         public Task<TResult> QueryAsync<TResult>(string url, object para)
         {
-            url = $"{ControllUrl}{url}{formatPara(para)}";
+            url = $"{ControllerUrl}{url}{formatPara(para)}";
             return processAsync<TResult>(_client.GetAsync(url));
         }
         #region
