@@ -4,6 +4,10 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>HowellFeng</Authors>
+    <Company />
+    <Product />
+    <Description>WebInteraction是基于HttpClient的Restful调用封装</Description>
   </PropertyGroup>
 
   <ItemGroup>
