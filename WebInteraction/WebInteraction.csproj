@@ -8,10 +8,11 @@
     <Company />
     <Product />
     <Description>WebInteraction是基于HttpClient的Restful调用封装</Description>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.6" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.4" />
     <PackageReference Include="Microsoft.AspNetCore.Routing" Version="2.1.0" />
   </ItemGroup>
 
