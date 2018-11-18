@@ -70,14 +70,21 @@ namespace WebInteraction
     {
         protected HttpClient _client;
         public string ControllerUrl { get; private set; }
-        public WebApiClient(string server, string prefix, string controller, int timeout = 15)
+        public WebApiClient(int timeout = 15)
         {
-            ControllerUrl = $"{prefix}{controller}";
             _client = new HttpClient();
-            _client.BaseAddress = new Uri(server);
             _client.DefaultRequestHeaders.Accept.Clear();
             _client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
             _client.Timeout = TimeSpan.FromSeconds(timeout);
+        }
+        public WebApiClient(string server, string prefix, string controller, int timeout = 15) : this(timeout)
+        {
+            ControllerUrl = $"{prefix}{controller}";
+            //_client = new HttpClient();
+            _client.BaseAddress = new Uri(server);
+            //_client.DefaultRequestHeaders.Accept.Clear();
+            //_client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+            //_client.Timeout = TimeSpan.FromSeconds(timeout);
         }
         public WebApiClient(string server, string controller, int timeout = 15) : this(server, "api/", controller, timeout)
         {
